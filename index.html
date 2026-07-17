@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- config.js debe cargarse primero — contiene todos los datos del sitio -->
+  <script src="config.js"></script>
+  <!-- SEO (se sobreescribe dinámicamente desde config.js) -->
+  <title>MRPERFORMANCE</title>
+  <meta name="description" content="" />
+  <link rel="canonical" href="" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image"       content="" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23e10600' font-family='Arial' font-weight='bold'>M</text></svg>" />
+  <style>
+    :root {
+      --negro:       #0a0a0a;
+      --negro-suave: #151515;
+      --rojo:        #e10600;
+      --rojo-dark:   #a10400;
+      --blanco:      #ffffff;
+      --gris:        #8a8a8a;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
+    body {
+      font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+      background:var(--negro); color:var(--blanco);
+      display:flex; align-items:center; justify-content:center;
+      overflow:hidden; position:relative;
+    }
+
+    /* Franja diagonal negro/rojo de fondo, estilo taller de rendimiento */
+    body::before {
+      content:"";
+      position:fixed; inset:-10%;
+      background:repeating-linear-gradient(
+        135deg,
+        var(--negro) 0px, var(--negro) 60px,
+        var(--negro-suave) 60px, var(--negro-suave) 120px
+      );
+      z-index:0;
+    }
+
+    .wrap { position:relative; z-index:1; text-align:center; padding:1.5rem; }
+
+    .brand {
+      font-size:clamp(2.4rem, 9vw, 6rem);
+      font-weight:900;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      line-height:1;
+      white-space:nowrap;
+    }
+    .brand .mr   { color:var(--blanco); }
+    .brand .perf { color:var(--rojo); text-shadow:0 0 30px rgba(225,6,0,.55); }
+
+    .bar {
+      width:min(320px, 70vw); height:5px; margin:1.4rem auto 1.6rem;
+      background:linear-gradient(90deg, var(--rojo-dark), var(--rojo), var(--rojo-dark));
+      border-radius:3px;
+    }
+
+    .estado {
+      display:inline-block;
+      font-size:clamp(.85rem, 2.2vw, 1.1rem);
+      font-weight:800;
+      letter-spacing:.28em;
+      color:var(--blanco);
+      background:var(--rojo);
+      padding:.55rem 1.4rem;
+      border-radius:4px;
+    }
+
+    .msg {
+      margin-top:1.6rem;
+      font-size:.95rem;
+      color:var(--gris);
+      max-width:420px;
+      margin-left:auto; margin-right:auto;
+    }
+
+    footer {
+      position:fixed; bottom:1.2rem; left:0; right:0; z-index:1;
+      text-align:center; font-size:.75rem; color:var(--gris); letter-spacing:.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <h1 class="brand"><span class="mr">MR</span><span class="perf">PERFORMANCE</span></h1>
+    <div class="bar"></div>
+    <span class="estado" id="estado">EN CONSTRUCCIÓN</span>
+    <p class="msg" id="msg"></p>
+  </div>
+
+  <footer>© <span id="year"></span> <span id="footer-name">MRPERFORMANCE</span></footer>
+
+<script>
+const S = (typeof SITIO !== "undefined") ? SITIO : {};
+const $ = (id) => document.getElementById(id);
+
+function aplicarConfig() {
+  const c = S.colores || {}, root = document.documentElement.style;
+  const map = { negro:"--negro", negro_suave:"--negro-suave", rojo:"--rojo", rojo_dark:"--rojo-dark", blanco:"--blanco", gris:"--gris" };
+  Object.entries(map).forEach(([k, v]) => { if (c[k]) root.setProperty(v, c[k]); });
+
+  if (S.estado) $("estado").textContent = S.estado;
+  if (S.mensaje) $("msg").textContent = S.mensaje;
+  if (S.nombre) $("footer-name").textContent = S.nombre;
+  $("year").textContent = new Date().getFullYear();
+
+  const seo = S.seo || {};
+  document.title = seo.titulo || S.nombre || "MRPERFORMANCE";
+  const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute("content", val); };
+  const setHref = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute("href", val); };
+  setMeta('meta[name="description"]', seo.descripcion);
+  setHref('link[rel="canonical"]', seo.url);
+  setMeta('meta[property="og:url"]', seo.url);
+  setMeta('meta[property="og:title"]', seo.titulo);
+  setMeta('meta[property="og:description"]', seo.descripcion);
+  setMeta('meta[property="og:image"]', seo.imagen);
+}
+
+document.addEventListener("DOMContentLoaded", aplicarConfig);
+</script>
+</body>
+</html>
