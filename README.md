@@ -1,6 +1,6 @@
-# MRPERFORMANCE
+# MR PERFORMANCE
 
-Sitio estático "en construcción", con la misma estructura que **tienda oasis**:
+Landing page de mecánica y diagnóstico electrónico a domicilio, con la misma estructura que **tienda oasis**:
 
 - `index.html` — carga `config.js` y renderiza el sitio (nada de contenido hardcodeado, todo sale de config).
 - `config.js` — único archivo que necesitas tocar para cambiar textos, colores, WhatsApp, redes, SEO.

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- config.js debe cargarse primero — contiene todos los datos del sitio -->
+  <script src="config.js"></script>
+  <!-- SEO (se sobreescribe dinámicamente desde config.js) -->
+  <title>Productos — MR PERFORMANCE</title>
+  <meta name="description" content="" />
+  <link rel="canonical" href="" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image"       content="" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D0D0D'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23C8102E' font-family='Arial' font-weight='bold'>M</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="/" class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="nav-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="nav-wordmark" /></a>
+  <div class="nav-links" id="nav-links">
+    <a href="/">Inicio</a>
+    <a href="/servicios">Servicios</a>
+    <a href="/productos" class="activo">Productos</a>
+    <a href="/nosotros">Nosotros</a>
+    <a href="/clientes">Clientes</a>
+    <a href="/horarios">Horarios</a>
+    <a href="#" class="btn btn-primary nav-cta-mobile" data-wa-link>Hablar ahora</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-primary" data-wa-link aria-label="Hablar ahora por WhatsApp">Hablar ahora</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<header class="hero" id="inicio">
+  <div class="container">
+    <a href="/" class="volver-link">← Volver al inicio</a>
+    <div class="hero-solo" style="margin-top:1.2rem;">
+      <span class="hero-badge"><span class="dot"></span> <span id="hero-badge"></span></span>
+      <h1 class="titulo-racing" id="hero-title"></h1>
+      <p class="lead" id="hero-desc"></p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary" data-wa-link>Hablar ahora →</a>
+        <a href="#productos-baterias" class="btn btn-ghost">Ver baterías</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── BATERÍAS ─── -->
+<section id="productos-baterias">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Baterías</span>
+      <h2>Baterías certificadas, instaladas en tu domicilio</h2>
+      <p>Medimos tu sistema de carga antes de recomendar el reemplazo — sin adivinar.</p>
+    </div>
+    <div class="grid-productos" id="baterias-grid"></div>
+  </div>
+</section>
+
+<!-- ─── OTROS PRODUCTOS ─── -->
+<section>
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">También disponible</span>
+      <h2>Otros productos de mecánica</h2>
+    </div>
+    <div class="grid-otros" id="otros-grid"></div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section>
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>¿No sabes qué batería necesitas?</h2>
+      <p>Cuéntanos la marca y modelo de tu vehículo y vemos qué batería le sirve.</p>
+      <a href="#" class="btn btn-ghost" data-wa-link>Escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="footer-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="footer-wordmark" /></div>
+    <p id="footer-eslogan"></p>
+    <p class="fine">© <span id="year"></span> <span id="footer-name">MR PERFORMANCE</span> · Precisión y tecnología en la puerta de tu hogar</p>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT (persistente) ─── -->
+<a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp">!</a>
+
+<script src="site.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════════
+//  MR PERFORMANCE — Productos: render dinámico desde config.js
+// ════════════════════════════════════════════════════════════════
+
+function aplicarConfig() {
+  const pp = S.productos_pagina || {};
+  $("hero-badge").textContent = pp.hero_badge || "";
+  $("hero-title").innerHTML   = esc(pp.hero_titulo || "Productos");
+  $("hero-desc").textContent  = pp.hero_desc || "";
+
+  $("baterias-grid").innerHTML = (S.baterias || []).map((b,i) => `
+    <div class="producto-card reveal" style="transition-delay:${(i%3)*70}ms">
+      <div class="producto-head">
+        ${renderIcono(b.icono || "bateria", b.modelo)}
+        <div>
+          <div class="marca">${esc(b.marca)}</div>
+          <h3>${esc(b.modelo)}</h3>
+        </div>
+      </div>
+      <p class="desc">${esc(b.desc)}</p>
+      <span class="garantia">${esc(b.garantia)}</span>
+      <button type="button" class="btn btn-wa btn-cotizar-producto" data-producto="${esc(b.marca)} ${esc(b.modelo)}">Consultar disponibilidad</button>
+    </div>`).join("");
+
+  $("otros-grid").innerHTML = (S.otros_productos || []).map(o => `
+    <div class="otro-producto reveal">
+      <span class="ico">${renderIcono(o.icono, o.nombre)}</span>
+      <div><h4>${esc(o.nombre)}</h4><p>${esc(o.desc)}</p></div>
+    </div>`).join("");
+
+  document.querySelectorAll(".btn-cotizar-producto").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const msg = `Hola, quiero consultar disponibilidad de: ${btn.dataset.producto}`;
+      window.open(waUrl(msg), "_blank");
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  aplicarColores();
+  aplicarSEO({
+    titulo: "Productos — MR PERFORMANCE",
+    descripcion: "Baterías certificadas y repuestos de mecánica con instalación a domicilio. Consulta disponibilidad por WhatsApp.",
+  });
+  aplicarWaLinks();
+  aplicarFooter();
+  aplicarConfig();
+  initNav();
+  observarReveal();
+});
+</script>
+</body>
+</html>

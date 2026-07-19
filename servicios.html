@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- config.js debe cargarse primero — contiene todos los datos del sitio -->
+  <script src="config.js"></script>
+  <!-- SEO (se sobreescribe dinámicamente desde config.js) -->
+  <title>Servicios — MR PERFORMANCE</title>
+  <meta name="description" content="" />
+  <link rel="canonical" href="" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="" />
+  <meta property="og:title"       content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:image"       content="" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D0D0D'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23C8102E' font-family='Arial' font-weight='bold'>M</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="/" class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="nav-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="nav-wordmark" /></a>
+  <div class="nav-links" id="nav-links">
+    <a href="/">Inicio</a>
+    <a href="/servicios" class="activo">Servicios</a>
+    <a href="/productos">Productos</a>
+    <a href="/nosotros">Nosotros</a>
+    <a href="/clientes">Clientes</a>
+    <a href="/horarios">Horarios</a>
+    <a href="#" class="btn btn-primary nav-cta-mobile" data-wa-link>Hablar ahora</a>
+  </div>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-primary" data-wa-link aria-label="Hablar ahora por WhatsApp">Hablar ahora</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<header class="hero" id="inicio">
+  <div class="container">
+    <a href="/" class="volver-link">← Volver al inicio</a>
+    <div class="hero-solo" style="margin-top:1.2rem;">
+      <span class="hero-badge"><span class="dot"></span> <span id="hero-badge"></span></span>
+      <h1 class="titulo-racing" id="hero-title"></h1>
+      <p class="lead" id="hero-desc"></p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary" data-wa-link>Hablar ahora →</a>
+        <a href="#lista-servicios" class="btn btn-ghost">Ver servicios</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── LISTADO DETALLADO DE SERVICIOS ─── -->
+<section id="lista-servicios">
+  <div class="container">
+    <div id="servicios-detalle"></div>
+  </div>
+</section>
+
+<!-- ─── CÓMO FUNCIONA ─── -->
+<section id="cotizar" style="background:var(--negro-suave);">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Cómo funciona</span>
+      <h2>Pide tu servicio en 3 pasos</h2>
+    </div>
+    <div class="pasos reveal" id="pasos" style="max-width:640px; margin:0 auto;"></div>
+  </div>
+</section>
+
+<!-- ─── CTA FINAL ─── -->
+<section>
+  <div class="container">
+    <div class="cta-banner reveal">
+      <h2>¿Tu problema no está en la lista?</h2>
+      <p>Cuéntanos qué le pasa a tu vehículo y vemos si podemos ayudarte.</p>
+      <a href="#" class="btn btn-ghost" data-wa-link>Escríbenos por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="footer-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="footer-wordmark" /></div>
+    <p id="footer-eslogan"></p>
+    <p class="fine">© <span id="year"></span> <span id="footer-name">MR PERFORMANCE</span> · Precisión y tecnología en la puerta de tu hogar</p>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT (persistente) ─── -->
+<a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp">!</a>
+
+<script src="site.js"></script>
+<script>
+// ════════════════════════════════════════════════════════════════
+//  MR PERFORMANCE — Servicios: render dinámico desde config.js
+// ════════════════════════════════════════════════════════════════
+
+function aplicarConfig() {
+  const sp = S.servicios_pagina || {};
+  $("hero-badge").textContent = sp.hero_badge || "";
+  $("hero-title").innerHTML   = esc(sp.hero_titulo || "Nuestros servicios");
+  $("hero-desc").textContent  = sp.hero_desc || "";
+
+  $("servicios-detalle").innerHTML = (S.servicios || []).map((sv,i) => `
+    <div class="serv-detalle reveal" style="transition-delay:${(i%4)*70}ms">
+      <div class="serv-detalle-head">
+        <span class="ico">${renderIcono(sv.icono, sv.titulo)}</span>
+        <h3>${esc(sv.titulo)}</h3>
+      </div>
+      <p class="desc-larga">${esc(sv.detalle || sv.desc)}</p>
+      ${(sv.incluye && sv.incluye.length) ? `
+      <ul class="incluye-list">
+        ${sv.incluye.map(item => `<li>${esc(item)}</li>`).join("")}
+      </ul>` : ""}
+      <button type="button" class="btn btn-wa btn-cotizar-servicio" data-servicio="${esc(sv.titulo)}">Cotizar este servicio</button>
+    </div>`).join("");
+
+  $("servicios-detalle").querySelectorAll(".btn-cotizar-servicio").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const msg = `Hola, quiero cotizar: ${btn.dataset.servicio}`;
+      window.open(waUrl(msg), "_blank");
+    });
+  });
+
+  $("pasos").innerHTML = (S.proceso || []).map(p => `
+    <div class="paso">
+      <span class="num">${esc(p.numero)}</span>
+      <div><h3>${esc(p.titulo)}</h3><p>${esc(p.desc)}</p></div>
+    </div>`).join("");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  aplicarColores();
+  aplicarSEO({
+    titulo: "Servicios — MR PERFORMANCE",
+    descripcion: "Diagnóstico electrónico, mecánica general, baterías y mantención preventiva a domicilio. Revisa qué incluye cada servicio y cotiza por WhatsApp.",
+  });
+  aplicarWaLinks();
+  aplicarFooter();
+  aplicarConfig();
+  initNav();
+  observarReveal();
+});
+</script>
+</body>
+</html>

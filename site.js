@@ -1,0 +1,97 @@
+/**
+ * ╔══════════════════════════════════════════════════════════════╗
+ * ║  site.js — utilidades compartidas por todas las páginas       ║
+ * ║  de MR PERFORMANCE. Requiere que config.js se cargue antes.   ║
+ * ╚══════════════════════════════════════════════════════════════╝
+ */
+const S = (typeof SITIO !== "undefined") ? SITIO : {};
+
+function esc(s) {
+  return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+const $ = (id) => document.getElementById(id);
+const waUrl = (msg) => `https://wa.me/${S.whatsapp || ""}?text=${encodeURIComponent(msg)}`;
+const iniciales = (nombre) => String(nombre||"").split(" ").filter(Boolean).slice(0,2).map(p=>p[0].toUpperCase()).join("");
+
+// ── Íconos propios (PNG en /iconos). Sin emoji: si no hay PNG para la clave, cae a "!" ──
+const ICONOS_IMG = {
+  ingeniero:  "iconos/ingeniero.png",
+  escaner:    "iconos/escaner.png",
+  furgoneta:  "iconos/furgoneta.png",
+  bateria:    "iconos/bateria.png",
+  diagnostico:"iconos/diagnostico.png",
+  mecanica:   "iconos/mecanica.png",
+  mantencion: "iconos/mantencion.png",
+};
+function renderIcono(valor, alt) {
+  if (ICONOS_IMG[valor]) {
+    return `<span class="icono-badge"><img src="${ICONOS_IMG[valor]}" alt="${esc(alt || valor)}" loading="lazy" /></span>`;
+  }
+  return `<span class="icono-badge icono-fallback" role="img" aria-label="${esc(alt || "")}">!</span>`;
+}
+
+// ── Colores de marca (CSS custom properties) ──
+function aplicarColores() {
+  const c = S.colores || {}, root = document.documentElement.style;
+  const map = { negro:"--negro", negro_suave:"--negro-suave", rojo:"--rojo", rojo_hover:"--rojo-hover", plata:"--plata", plata_dark:"--plata-dark", blanco:"--blanco", gris:"--gris" };
+  Object.entries(map).forEach(([k,v]) => { if (c[k]) root.setProperty(v, c[k]); });
+}
+
+// ── SEO — usa S.seo, con overrides opcionales por página ──
+function aplicarSEO(override) {
+  const seo = Object.assign({}, S.seo, override || {});
+  document.title = seo.titulo || S.nombre || "MR PERFORMANCE";
+  const setMeta = (sel,val) => { const el=document.querySelector(sel); if(el&&val) el.setAttribute("content",val); };
+  const setHref = (sel,val) => { const el=document.querySelector(sel); if(el&&val) el.setAttribute("href",val); };
+  setMeta('meta[name="description"]', seo.descripcion);
+  setHref('link[rel="canonical"]', seo.url);
+  setMeta('meta[property="og:url"]', seo.url);
+  setMeta('meta[property="og:title"]', seo.titulo);
+  setMeta('meta[property="og:description"]', seo.descripcion);
+  setMeta('meta[property="og:image"]', seo.imagen);
+}
+
+// ── Links de WhatsApp: cualquier elemento con [data-wa-link] recibe el href ──
+function aplicarWaLinks(mensaje) {
+  const url = waUrl(mensaje || S.whatsapp_msg || "Hola, quiero cotizar un servicio");
+  document.querySelectorAll("[data-wa-link]").forEach(el => { el.href = url; });
+}
+
+// ── Footer básico (año, nombre, eslogan) ──
+function aplicarFooter() {
+  if ($("year")) $("year").textContent = new Date().getFullYear();
+  if ($("footer-name")) $("footer-name").textContent = S.nombre || "MR PERFORMANCE";
+  if ($("footer-eslogan")) $("footer-eslogan").textContent = S.hero_titulo || "";
+}
+
+// ── Nav: sombra al hacer scroll + menú hamburguesa ──
+function initNav() {
+  const nav = $("nav");
+  window.addEventListener("scroll", () => nav.classList.toggle("scrolled", window.scrollY > 20));
+  const toggle = $("nav-toggle"), links = $("nav-links");
+  toggle.addEventListener("click", () => {
+    const open = links.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", open);
+  });
+  links.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    links.classList.remove("open"); toggle.setAttribute("aria-expanded", false);
+  }));
+}
+
+// ── Reveal on scroll ──
+function observarReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+  }, { threshold:0.12 });
+  document.querySelectorAll(".reveal:not(.visible)").forEach(el => obs.observe(el));
+}
+
+// ── Rutas limpias: si entran directo por /nosotros, /contacto, etc., scrollea a la sección ──
+function irASeccionPorRuta(secciones) {
+  const ruta = window.location.pathname.replace(/\/$/, "");
+  const id = (secciones || []).find(s => ruta === "/" + s);
+  if (!id) return;
+  const el = document.getElementById(id);
+  if (el) requestAnimationFrame(() => el.scrollIntoView({ behavior: "auto", block: "start" }));
+}

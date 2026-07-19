@@ -24,3 +24,27 @@
   for = "/config.js"
   [headers.values]
     Cache-Control = "public, max-age=300"
+
+# ── Rutas "limpias" a secciones de la home (para compartir en Instagram, anuncios, etc.) ──
+# /servicios NO está acá: es una página propia (servicios.html) que Netlify sirve
+# automáticamente gracias a las "pretty URLs". Estas otras siguen viviendo dentro
+# de index.html — la regla sirve el mismo archivo y su JS hace scroll a la sección.
+[[redirects]]
+  from = "/nosotros"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/clientes"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/horarios"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contacto"
+  to = "/index.html"
+  status = 200

@@ -6,7 +6,7 @@
   <!-- config.js debe cargarse primero — contiene todos los datos del sitio -->
   <script src="config.js"></script>
   <!-- SEO (se sobreescribe dinámicamente desde config.js) -->
-  <title>MRPERFORMANCE</title>
+  <title>MR PERFORMANCE</title>
   <meta name="description" content="" />
   <link rel="canonical" href="" />
   <meta property="og:type"        content="website" />
@@ -15,119 +15,390 @@
   <meta property="og:description" content="" />
   <meta property="og:image"       content="" />
   <meta name="twitter:card"        content="summary_large_image" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23e10600' font-family='Arial' font-weight='bold'>M</text></svg>" />
-  <style>
-    :root {
-      --negro:       #0a0a0a;
-      --negro-suave: #151515;
-      --rojo:        #e10600;
-      --rojo-dark:   #a10400;
-      --blanco:      #ffffff;
-      --gris:        #8a8a8a;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { height:100%; }
-    body {
-      font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-      background:var(--negro); color:var(--blanco);
-      display:flex; align-items:center; justify-content:center;
-      overflow:hidden; position:relative;
-    }
-
-    /* Franja diagonal negro/rojo de fondo, estilo taller de rendimiento */
-    body::before {
-      content:"";
-      position:fixed; inset:-10%;
-      background:repeating-linear-gradient(
-        135deg,
-        var(--negro) 0px, var(--negro) 60px,
-        var(--negro-suave) 60px, var(--negro-suave) 120px
-      );
-      z-index:0;
-    }
-
-    .wrap { position:relative; z-index:1; text-align:center; padding:1.5rem; }
-
-    .brand {
-      font-size:clamp(2.4rem, 9vw, 6rem);
-      font-weight:900;
-      letter-spacing:.03em;
-      text-transform:uppercase;
-      line-height:1;
-      white-space:nowrap;
-    }
-    .brand .mr   { color:var(--blanco); }
-    .brand .perf { color:var(--rojo); text-shadow:0 0 30px rgba(225,6,0,.55); }
-
-    .bar {
-      width:min(320px, 70vw); height:5px; margin:1.4rem auto 1.6rem;
-      background:linear-gradient(90deg, var(--rojo-dark), var(--rojo), var(--rojo-dark));
-      border-radius:3px;
-    }
-
-    .estado {
-      display:inline-block;
-      font-size:clamp(.85rem, 2.2vw, 1.1rem);
-      font-weight:800;
-      letter-spacing:.28em;
-      color:var(--blanco);
-      background:var(--rojo);
-      padding:.55rem 1.4rem;
-      border-radius:4px;
-    }
-
-    .msg {
-      margin-top:1.6rem;
-      font-size:.95rem;
-      color:var(--gris);
-      max-width:420px;
-      margin-left:auto; margin-right:auto;
-    }
-
-    footer {
-      position:fixed; bottom:1.2rem; left:0; right:0; z-index:1;
-      text-align:center; font-size:.75rem; color:var(--gris); letter-spacing:.05em;
-    }
-  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D0D0D'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23C8102E' font-family='Arial' font-weight='bold'>M</text></svg>" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <div class="wrap">
-    <h1 class="brand"><span class="mr">MR</span><span class="perf">PERFORMANCE</span></h1>
-    <div class="bar"></div>
-    <span class="estado" id="estado">EN CONSTRUCCIÓN</span>
-    <p class="msg" id="msg"></p>
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#inicio" class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="nav-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="nav-wordmark" /></a>
+  <div class="nav-links" id="nav-links">
+    <a href="#inicio">Inicio</a>
+    <a href="/servicios">Servicios</a>
+    <a href="/productos">Productos</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#clientes">Clientes</a>
+    <a href="#horarios">Horarios</a>
+    <a href="#" class="btn btn-primary nav-cta-mobile" data-wa-link>Hablar ahora</a>
   </div>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-primary" id="nav-wa" data-wa-link aria-label="Hablar ahora por WhatsApp">Hablar ahora</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</nav>
 
-  <footer>© <span id="year"></span> <span id="footer-name">MRPERFORMANCE</span></footer>
+<!-- ─── HERO ─── -->
+<header class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-badge"><span class="dot"></span> <span id="hero-badge"></span></span>
+      <h1 class="titulo-racing" id="hero-title"></h1>
+      <p class="lead" id="hero-desc"></p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary" data-wa-link>Hablar ahora →</a>
+        <a href="/servicios" class="btn btn-ghost">Ver servicios</a>
+      </div>
+      <div class="hero-difs" id="hero-difs"></div>
+    </div>
+    <div class="hero-visual reveal" aria-hidden="true">
+      <div class="marcas-float" aria-hidden="true">
+        <div class="marcas-float-slot">
+          <img src="iconos/marcas/chevrolet.png" alt="Chevrolet" style="--i:0" />
+          <img src="iconos/marcas/honda.png"     alt="Honda"     style="--i:1" />
+          <img src="iconos/marcas/kia.png"       alt="Kia"       style="--i:2" />
+          <img src="iconos/marcas/nissan.png"    alt="Nissan"    style="--i:3" />
+          <img src="iconos/marcas/renault.png"   alt="Renault"   style="--i:4" />
+          <img src="iconos/marcas/toyota.png"    alt="Toyota"    style="--i:5" />
+        </div>
+        <div class="marcas-float-slot">
+          <img src="iconos/marcas/citroen.png"    alt="Citroën"    style="--i:0" />
+          <img src="iconos/marcas/hyundai.png"    alt="Hyundai"    style="--i:1" />
+          <img src="iconos/marcas/mazda.png"      alt="Mazda"      style="--i:2" />
+          <img src="iconos/marcas/peugeot.png"    alt="Peugeot"    style="--i:3" />
+          <img src="iconos/marcas/subaru.png"     alt="Subaru"     style="--i:4" />
+          <img src="iconos/marcas/volkswagen.png" alt="Volkswagen" style="--i:5" />
+        </div>
+        <div class="marcas-float-slot">
+          <img src="iconos/marcas/ford.png"       alt="Ford"       style="--i:0" />
+          <img src="iconos/marcas/jeep.png"       alt="Jeep"       style="--i:1" />
+          <img src="iconos/marcas/mitsubishi.png" alt="Mitsubishi" style="--i:2" />
+          <img src="iconos/marcas/ram.png"        alt="RAM"        style="--i:3" />
+          <img src="iconos/marcas/suzuki.png"     alt="Suzuki"     style="--i:4" />
+          <img src="iconos/marcas/volvo.png"      alt="Volvo"      style="--i:5" />
+        </div>
+      </div>
+      <div class="scanner-head">
+        <span class="lbl">OBD-II · Diagnóstico</span>
+        <span class="live"><span class="blip"></span> En vivo</span>
+      </div>
+      <div class="scanner-screen">
+        <svg viewBox="0 0 300 90" preserveAspectRatio="none">
+          <polyline class="scanner-wave" points="0,45 20,45 32,15 46,75 60,45 90,45 100,25 112,65 124,45 160,45 172,20 186,70 198,45 230,45 240,30 252,60 264,45 300,45" />
+        </svg>
+        <div class="scanner-codes">
+          <span class="ok">✓ SISTEMA OK</span>
+          <span>RPM 812</span>
+          <span>VOLT 12.6</span>
+          <span>TEMP 91°C</span>
+        </div>
+      </div>
+      <div class="scanner-stats" id="scanner-stats"></div>
+      <span class="float-card br"><span class="star">★</span> Certificado y garantizado</span>
+    </div>
+  </div>
+</header>
 
+<!-- ─── SERVICIOS ─── -->
+<section id="servicios">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Servicios</span>
+      <h2>Todo lo que tu vehículo necesita</h2>
+      <p>Diagnóstico y mecánica de nivel taller, sin que salgas de tu casa.</p>
+    </div>
+    <div class="grid-servicios" id="servicios-grid"></div>
+    <div class="ver-todos reveal">
+      <a href="/servicios" class="btn btn-ghost">Ver todos los servicios en detalle →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CÓMO FUNCIONA / COTIZAR ─── -->
+<section id="cotizar">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Cómo funciona</span>
+      <h2>Pide tu servicio en 3 pasos</h2>
+    </div>
+    <div class="cotizar-grid">
+      <div class="pasos reveal" id="pasos"></div>
+      <div class="form-card reveal">
+        <h3>Cotización rápida</h3>
+        <form id="form-cotizar">
+          <div class="campo">
+            <label for="f-nombre">Nombre</label>
+            <input type="text" id="f-nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="campo">
+            <label for="f-telefono">Teléfono</label>
+            <input type="tel" id="f-telefono" name="telefono" placeholder="+56 9 1234 5678" required />
+          </div>
+          <div class="campo">
+            <label for="f-servicio">Tipo de servicio</label>
+            <select id="f-servicio" name="servicio" required></select>
+          </div>
+          <div class="campo">
+            <label for="f-comuna">Comuna</label>
+            <input type="text" id="f-comuna" name="comuna" placeholder="Ej: Providencia" />
+          </div>
+          <div class="campo">
+            <label for="f-mensaje">Mensaje</label>
+            <textarea id="f-mensaje" name="mensaje" placeholder="Cuéntanos qué le pasa a tu vehículo"></textarea>
+          </div>
+          <button type="submit" class="btn btn-wa btn-block">Enviar por WhatsApp</button>
+        </form>
+        <p class="form-nota">Al enviar, se abrirá WhatsApp con tus datos precargados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NOSOTROS ─── -->
+<section id="nosotros">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Nosotros</span>
+      <h2>Conoce a nuestros ingenieros</h2>
+    </div>
+    <div class="historia-box reveal">
+      <p id="historia"></p>
+    </div>
+    <div class="grid-equipo" id="equipo-grid"></div>
+  </div>
+</section>
+
+<!-- ─── CLIENTES ─── -->
+<section id="clientes">
+  <div class="container">
+    <div class="sec-head reveal" id="testimonios-head">
+      <span class="sec-tag">Clientes</span>
+      <h2>Lo que dicen quienes ya nos probaron</h2>
+    </div>
+    <div class="testi-grid" id="testimonios-grid"></div>
+    <div class="marcas-row reveal">
+      <span class="lbl">Atendemos todas las marcas, entre ellas</span>
+      <div class="marcas-chips" id="marcas-chips"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HORARIOS ─── -->
+<section id="horarios">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Horarios</span>
+      <h2>Disponibilidad de atención</h2>
+    </div>
+    <div class="reveal" style="display:flex; justify-content:center;">
+      <div class="estado-actual" id="estado-actual"><span class="dot"></span><span id="estado-texto">Calculando…</span></div>
+    </div>
+    <div class="horarios-wrap reveal" id="horarios-lista"></div>
+    <p class="urgencias-nota" id="urgencias-nota"></p>
+  </div>
+</section>
+
+<!-- ─── CONTACTO ─── -->
+<section id="contacto">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-tag">Contacto</span>
+      <h2>Coordinemos tu servicio</h2>
+    </div>
+    <div class="contact-grid reveal">
+      <div>
+        <ul class="contact-list" id="contact-list"></ul>
+        <div class="socials" id="socials"></div>
+      </div>
+      <div class="cobertura-card">
+        <span class="pin">!</span>
+        <h3>Zona de cobertura</h3>
+        <div class="cobertura-chips" id="cobertura-chips"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <div class="nav-logo"><img src="iconos/logo-emblem.png" alt="MR" class="footer-emblem" /><img src="iconos/logo-letras.png" alt="PERFORMANCE" class="footer-wordmark" /></div>
+    <p id="footer-eslogan"></p>
+    <p class="fine">© <span id="year"></span> <span id="footer-name">MR PERFORMANCE</span> · Precisión y tecnología en la puerta de tu hogar</p>
+  </div>
+</footer>
+
+<!-- ─── WHATSAPP FLOAT (persistente) ─── -->
+<a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp">!</a>
+
+<script src="site.js"></script>
 <script>
-const S = (typeof SITIO !== "undefined") ? SITIO : {};
-const $ = (id) => document.getElementById(id);
+// ════════════════════════════════════════════════════════════════
+//  MR PERFORMANCE — Inicio: render dinámico desde config.js
+// ════════════════════════════════════════════════════════════════
 
+// ── APLICAR CONFIG (contenido propio de esta página) ──
 function aplicarConfig() {
-  const c = S.colores || {}, root = document.documentElement.style;
-  const map = { negro:"--negro", negro_suave:"--negro-suave", rojo:"--rojo", rojo_dark:"--rojo-dark", blanco:"--blanco", gris:"--gris" };
-  Object.entries(map).forEach(([k, v]) => { if (c[k]) root.setProperty(v, c[k]); });
+  $("hero-badge").textContent = S.hero_badge || "";
+  $("hero-title").innerHTML   = (S.hero_titulo || "").replace(/(alto rendimiento)/i, '<span class="accent">$1</span>');
+  $("hero-desc").textContent  = S.hero_desc || "";
 
-  if (S.estado) $("estado").textContent = S.estado;
-  if (S.mensaje) $("msg").textContent = S.mensaje;
-  if (S.nombre) $("footer-name").textContent = S.nombre;
-  $("year").textContent = new Date().getFullYear();
+  // Estadísticas del panel del hero
+  $("scanner-stats").innerHTML = (S.hero_stats || []).map(s => `
+    <div class="scanner-stat"><div class="n">${esc(s.numero)}</div><div class="l">${esc(s.label)}</div></div>`).join("");
 
-  const seo = S.seo || {};
-  document.title = seo.titulo || S.nombre || "MRPERFORMANCE";
-  const setMeta = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute("content", val); };
-  const setHref = (sel, val) => { const el = document.querySelector(sel); if (el && val) el.setAttribute("href", val); };
-  setMeta('meta[name="description"]', seo.descripcion);
-  setHref('link[rel="canonical"]', seo.url);
-  setMeta('meta[property="og:url"]', seo.url);
-  setMeta('meta[property="og:title"]', seo.titulo);
-  setMeta('meta[property="og:description"]', seo.descripcion);
-  setMeta('meta[property="og:image"]', seo.imagen);
+  // Diferenciadores hero
+  $("hero-difs").innerHTML = (S.diferenciadores || []).map(d => `
+    <div class="hero-dif">
+      <span class="ico">${renderIcono(d.icono, d.titulo)}</span>
+      <span class="t">${esc(d.titulo)}</span>
+      <span class="d">${esc(d.desc)}</span>
+    </div>`).join("");
+
+  // Servicios
+  $("servicios-grid").innerHTML = (S.servicios || []).map((sv,i) => `
+    <div class="card-serv reveal" style="transition-delay:${(i%4)*70}ms">
+      <div class="ico">${renderIcono(sv.icono, sv.titulo)}</div>
+      <h3>${esc(sv.titulo)}</h3>
+      <p>${esc(sv.desc)}</p>
+      <button type="button" class="btn btn-primary btn-cotizar" data-servicio="${esc(sv.titulo)}">Cotizar</button>
+    </div>`).join("");
+  $("servicios-grid").querySelectorAll(".btn-cotizar").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const sel = $("f-servicio");
+      if (sel) sel.value = btn.dataset.servicio;
+      document.getElementById("cotizar").scrollIntoView({ behavior:"smooth" });
+      $("f-nombre") && $("f-nombre").focus({ preventScroll:true });
+    });
+  });
+
+  // Select del formulario
+  $("f-servicio").innerHTML = `<option value="" disabled selected>Selecciona un servicio</option>` +
+    (S.servicios || []).map(sv => `<option value="${esc(sv.titulo)}">${esc(sv.titulo)}</option>`).join("") +
+    `<option value="Otro">Otro</option>`;
+
+  // Pasos
+  $("pasos").innerHTML = (S.proceso || []).map(p => `
+    <div class="paso">
+      <span class="num">${esc(p.numero)}</span>
+      <div><h3>${esc(p.titulo)}</h3><p>${esc(p.desc)}</p></div>
+    </div>`).join("");
+
+  // Historia + equipo
+  $("historia").textContent = S.historia || "";
+  $("equipo-grid").innerHTML = (S.equipo || []).map(m => `
+    <div class="miembro reveal">
+      <div class="avatar">${m.foto ? `<img src="${esc(m.foto)}" alt="${esc(m.nombre)}" />` : esc(iniciales(m.nombre))}</div>
+      <h3>${esc(m.nombre)}</h3>
+      <div class="cargo">${esc(m.cargo)}</div>
+      <div class="exp">${esc(m.experiencia)} años de experiencia</div>
+    </div>`).join("");
+
+  // Testimonios (la sección se oculta sola si no hay ninguno cargado en config.js)
+  const hayTestimonios = (S.testimonios || []).length > 0;
+  $("testimonios-head").style.display = hayTestimonios ? "" : "none";
+  $("testimonios-grid").style.display = hayTestimonios ? "" : "none";
+  $("testimonios-grid").innerHTML = (S.testimonios || []).map(t => `
+    <div class="testi reveal">
+      <div class="stars">${"★".repeat(t.estrellas||5)}${"☆".repeat(5-(t.estrellas||5))}</div>
+      <p>"${esc(t.texto)}"</p>
+      <div class="testi-author">
+        <span class="av">${esc(iniciales(t.nombre))}</span>
+        <div><div class="nm">${esc(t.nombre)}</div><div class="dt">${esc(t.comuna)}</div></div>
+      </div>
+    </div>`).join("");
+
+  // Marcas atendidas
+  $("marcas-chips").innerHTML = (S.marcas_atendidas || []).map(m => `<span>${esc(m)}</span>`).join("");
+
+  // Contacto
+  const ci = [
+    { txt:S.telefono },
+    { txt:S.email },
+    { txt:S.whatsapp ? "Escríbenos por WhatsApp" : "" },
+  ].filter(x => x.txt);
+  $("contact-list").innerHTML = ci.map(x => `<li><span class="ico">!</span><span>${esc(x.txt)}</span></li>`).join("");
+  $("cobertura-chips").innerHTML = (S.comunas || []).map(c => `<span>${esc(c)}</span>`).join("");
+
+  const redes = S.redes || {};
+  $("socials").innerHTML = Object.entries(redes).filter(([,url])=>url)
+    .map(([k,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(k)}">!</a>`).join("");
 }
 
-document.addEventListener("DOMContentLoaded", aplicarConfig);
+// ── HORARIOS: render + estado en vivo ──
+function parseHora(hhmm) {
+  const [h,m] = String(hhmm||"0:0").split(":").map(Number);
+  return h*60+m;
+}
+function renderHorarios() {
+  const h = S.horarios || {};
+  const ahora = new Date();
+  const diaSemana = ahora.getDay(); // 0=domingo ... 6=sábado
+  const minutosAhora = ahora.getHours()*60 + ahora.getMinutes();
+
+  const bloques = [
+    { key:"lunes_viernes", dias:[1,2,3,4,5], cfg:h.lunes_viernes },
+    { key:"sabado",        dias:[6],         cfg:h.sabado },
+    { key:"domingo",       dias:[0],         cfg:h.domingo },
+  ];
+
+  $("horarios-lista").innerHTML = bloques.map(b => {
+    const esHoy = b.dias.includes(diaSemana);
+    const horaTxt = (b.cfg && b.cfg.activo) ? `${b.cfg.desde} – ${b.cfg.hasta} hrs` : "Cerrado" + (S.urgencias_247 ? " · solo urgencias" : "");
+    return `<div class="fila-horario ${esHoy?"hoy":""}"><span class="dia">${esc(b.cfg ? b.cfg.texto : "")}</span><span class="hora">${esc(horaTxt)}</span></div>`;
+  }).join("");
+
+  let abierto = false;
+  const bloqueHoy = bloques.find(b => b.dias.includes(diaSemana));
+  if (bloqueHoy && bloqueHoy.cfg && bloqueHoy.cfg.activo) {
+    const desde = parseHora(bloqueHoy.cfg.desde), hasta = parseHora(bloqueHoy.cfg.hasta);
+    abierto = minutosAhora >= desde && minutosAhora < hasta;
+  }
+
+  const el = $("estado-actual");
+  el.classList.toggle("abierto", abierto);
+  el.classList.toggle("cerrado", !abierto);
+  $("estado-texto").textContent = abierto ? "Disponible ahora" : "Fuera de horario";
+
+  $("urgencias-nota").innerHTML = S.urgencias_247
+    ? `¿Emergencia fuera de horario? <span class="rojo">Escríbenos por WhatsApp</span>, atendemos urgencias.`
+    : "";
+}
+
+// ── FORMULARIO → WHATSAPP ──
+function initFormulario() {
+  $("form-cotizar").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nombre   = $("f-nombre").value.trim();
+    const telefono = $("f-telefono").value.trim();
+    const servicio = $("f-servicio").value;
+    const comuna   = $("f-comuna").value.trim();
+    const mensaje  = $("f-mensaje").value.trim();
+
+    let msg = `Hola, quiero cotizar un servicio:\n\n`;
+    msg += `• Nombre: ${nombre}\n`;
+    msg += `• Teléfono: ${telefono}\n`;
+    msg += `• Servicio: ${servicio}\n`;
+    if (comuna)   msg += `• Comuna: ${comuna}\n`;
+    if (mensaje)  msg += `• Detalle: ${mensaje}\n`;
+
+    window.open(waUrl(msg), "_blank");
+  });
+}
+
+// ── INIT ──
+document.addEventListener("DOMContentLoaded", () => {
+  aplicarColores();
+  aplicarSEO();
+  aplicarWaLinks();
+  aplicarFooter();
+  aplicarConfig();
+  renderHorarios();
+  initFormulario();
+  initNav();
+  observarReveal();
+  irASeccionPorRuta(["cotizar", "nosotros", "clientes", "horarios", "contacto"]);
+});
 </script>
 </body>
 </html>
