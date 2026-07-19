@@ -35,7 +35,7 @@ const SITIO = {
   whatsapp:      "56962585505",
   whatsapp_msg:  "Hola, quiero cotizar un servicio",
   telefono:      "+56 9 6258 5505",
-  email:         "contacto@mrperformance.cl",
+  email:         "mauricio.concha@mrperformance.cl",
   zona_cobertura:"Región Metropolitana",
   comunas: [
     "Santiago Centro", "Providencia", "Ñuñoa", "Las Condes",
