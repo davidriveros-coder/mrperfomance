@@ -159,12 +159,11 @@
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-tag">Nosotros</span>
-      <h2>Conoce a nuestros mecánicos</h2>
+      <h2>Quiénes somos</h2>
     </div>
     <div class="historia-box reveal">
       <p id="historia"></p>
     </div>
-    <div class="grid-equipo" id="equipo-grid"></div>
   </div>
 </section>
 
@@ -284,15 +283,8 @@ function aplicarConfig() {
       <div><h3>${esc(p.titulo)}</h3><p>${esc(p.desc)}</p></div>
     </div>`).join("");
 
-  // Historia + equipo
+  // Historia
   $("historia").textContent = S.historia || "";
-  $("equipo-grid").innerHTML = (S.equipo || []).map(m => `
-    <div class="miembro reveal">
-      <div class="avatar">${m.foto ? `<img src="${esc(m.foto)}" alt="${esc(m.nombre)}" />` : esc(iniciales(m.nombre))}</div>
-      <h3>${esc(m.nombre)}</h3>
-      <div class="cargo">${esc(m.cargo)}</div>
-      <div class="exp">${esc(m.experiencia)} años de experiencia</div>
-    </div>`).join("");
 
   // Testimonios (la sección se oculta sola si no hay ninguno cargado en config.js)
   const hayTestimonios = (S.testimonios || []).length > 0;

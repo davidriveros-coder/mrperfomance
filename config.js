@@ -11,13 +11,12 @@ const SITIO = {
   tagline:      "<span class=\"mr\">MR</span><span class=\"perf\">PERFORMANCE</span>",
   division:     "HIGH-END PERFORMANCE DIVISION",
   hero_titulo:  "Mecánica de alto rendimiento, a la puerta de tu casa",
-  hero_desc:    "Diagnóstico electrónico y mecánica a domicilio. Mecánicos especializados, Escáner de última generación.",
+  hero_desc:    "Diagnóstico electrónico y mecánica a domicilio. Ingenieros especializados, Escáner de última generación.",
   hero_badge:   "Servicio a domicilio · Santiago",
 
   // Estadísticas del panel del hero (Escáner). Edita libremente.
   hero_stats: [
-    { numero:"+15", label:"Años de experiencia" },
-    { numero:"4.9★", label:"Calificación clientes" },
+    { numero:"+8", label:"Años de experiencia" },
   ],
 
   // ── COLORES (CSS custom properties) — taller premium ───────────
@@ -33,28 +32,27 @@ const SITIO = {
   },
 
   // ── CONTACTO ────────────────────────────────────────────────────
-  // TODO: reemplaza con el número real, formato 56912345678 (sin + ni espacios)
-  whatsapp:      "56900000000",
+  whatsapp:      "56962585505",
   whatsapp_msg:  "Hola, quiero cotizar un servicio",
-  telefono:      "+56 9 0000 0000",
+  telefono:      "+56 9 6258 5505",
   email:         "contacto@mrperformance.cl",
-  zona_cobertura:"Santiago y alrededores",
+  zona_cobertura:"Región Metropolitana",
   comunas: [
     "Santiago Centro", "Providencia", "Ñuñoa", "Las Condes",
-    "Vitacura", "La Reina", "Macul", "La Florida",
+    "Vitacura", "La Reina", "Macul", "La Florida", "Puente Alto",
   ],
 
   // ── REDES SOCIALES ─────────────────────────────────────────────
   redes: {
-    instagram: "https://instagram.com/mrperformance.cl",
-    facebook:  "",
+    instagram: "https://www.instagram.com/mrperformance0/?hl=es-la",
+    facebook:  "https://www.facebook.com/profile.php?id=61591959847435",
     tiktok:    "",
   },
 
   // ── DIFERENCIADORES (hero) ──────────────────────────────────────
   // icono: clave de PNG en /iconos. Si la clave no tiene PNG asociado, se muestra "!"
   diferenciadores: [
-    { icono:"ingeniero", titulo:"Mecánicos especializados", desc:"Profesionales certificados, no mecánicos improvisados." },
+    { icono:"ingeniero", titulo:"Ingenieros especializados", desc:"Profesionales certificados y apasionados por la excelencia." },
     { icono:"escaner",   titulo:"Escáner de última generación", desc:"Diagnóstico electrónico preciso, marca por marca." },
     { icono:"furgoneta", titulo:"Servicio a domicilio", desc:"Vamos donde estés, sin que muevas tu vehículo." },
   ],
@@ -117,19 +115,11 @@ const SITIO = {
   // ── CÓMO FUNCIONA (3 pasos) ──────────────────────────────────────
   proceso: [
     { numero:"01", titulo:"Cuéntanos qué le pasa a tu vehículo", desc:"Completa el formulario o escríbenos directo por WhatsApp." },
-    { numero:"02", titulo:"Te enviamos una cotización", desc:"Un mecánico revisa tu caso y te responde con precio y tiempo estimado." },
+    { numero:"02", titulo:"Te enviamos una cotización", desc:"Un ingeniero revisa tu caso y te responde con precio y tiempo estimado." },
     { numero:"03", titulo:"Coordinamos día y hora", desc:"Vamos a tu domicilio con el Escáner y las herramientas listas." },
   ],
 
-  // ── EQUIPO ────────────────────────────────────────────────────────
-  // foto: deja vacío ("") para mostrar iniciales; o pon una URL de imagen cuando la tengas
-  equipo: [
-    { nombre:"Mauricio Concha", cargo:"Mecánico en Diagnóstico Electrónico",           experiencia:12, foto:"" },
-    { nombre:"Ricardo Andrés",  cargo:"Especialista en Mecánica de Alto Rendimiento", experiencia:9,  foto:"" },
-    { nombre:"Unboxing",        cargo:"Técnico en Sistemas Eléctricos y Baterías",    experiencia:7,  foto:"" },
-  ],
-
-  historia: "El diagnóstico \"a ojo\" ya no alcanza. Por eso cada visita lleva Escáner profesional y mecánicos certificados, no aprendices.",
+  historia: "En Mr. Performance, fundada por Mauricio Concha y Ricardo Concha, transformamos el cuidado automotriz fusionando la alta ingeniería con un servicio accesible para todos. Somos una empresa liderada por ingenieros apasionados por la excelencia, especializados en mecánica de precisión, mecánica rápida y venta de baterías de alta calidad. Nuestra visión es romper el mito de que el servicio especializado es un lujo: creemos que todo conductor merece un diagnóstico exacto, energía confiable y una reparación segura, sin comprometer su presupuesto.",
 
   // ── TESTIMONIOS ───────────────────────────────────────────────────
   // Vacío hasta tener opiniones reales de clientes. Agrega objetos con este formato:
@@ -138,13 +128,13 @@ const SITIO = {
   testimonios: [
   ],
 
-  marcas_atendidas: ["Toyota", "Chevrolet", "Hyundai", "Nissan", "Suzuki", "Kia", "Mazda", "Ford"],
+  marcas_atendidas: ["Toyota", "Chevrolet", "Hyundai", "Nissan", "Suzuki", "Kia", "Mazda", "Ford", "Subaru", "Jeep", "Audi"],
 
   // ── HORARIOS DE ATENCIÓN ─────────────────────────────────────────
-  // Formato 24h. "activo:false" = cerrado ese día (salvo urgencias).
+  // Formato 24h. "activo:false" = cerrado ese día (salvo urgencias a consultar).
   horarios: {
-    lunes_viernes: { texto:"Lunes a Viernes", desde:"09:00", hasta:"19:00", activo:true },
-    sabado:        { texto:"Sábado",          desde:"09:00", hasta:"14:00", activo:true },
+    lunes_viernes: { texto:"Lunes a Viernes", desde:"08:00", hasta:"20:00", activo:true },
+    sabado:        { texto:"Sábado",          desde:"", hasta:"", activo:false },
     domingo:       { texto:"Domingo y feriados", desde:"", hasta:"", activo:false },
   },
   urgencias_247: true,
@@ -158,9 +148,12 @@ const SITIO = {
 
   // Baterías: producto principal de la página /productos
   baterias: [
-    { icono:"bateria", marca:"Bosch", modelo:"S4 45Ah", desc:"Para autos pequeños y uso urbano, arranque confiable en frío.", garantia:"12 meses de garantía" },
-    { icono:"bateria", marca:"Bosch", modelo:"S4 60Ah", desc:"Ideal para autos medianos, alta resistencia a la corrosión.", garantia:"12 meses de garantía" },
-    { icono:"bateria", marca:"Varta", modelo:"Blue Dynamic 70Ah", desc:"Mayor capacidad para SUV y camionetas.", garantia:"18 meses de garantía" },
+    { icono:"bateria", marca:"Rocket", modelo:"54Ah",       desc:"Para autos pequeños y uso urbano, arranque confiable en frío.", garantia:"12 meses de garantía" },
+    { icono:"bateria", marca:"Rocket", modelo:"70Ah",       desc:"Mayor capacidad para autos medianos y camionetas livianas.", garantia:"12 meses de garantía" },
+    { icono:"bateria", marca:"Bosch",  modelo:"S4 55Ah",    desc:"Para autos pequeños y uso urbano, alta resistencia a la corrosión.", garantia:"12 meses de garantía" },
+    { icono:"bateria", marca:"Bosch",  modelo:"70Ah",       desc:"Ideal para autos medianos, arranque confiable en frío.", garantia:"12 meses de garantía" },
+    { icono:"bateria", marca:"Bosch",  modelo:"90Ah",       desc:"Mayor capacidad para SUV y camionetas.", garantia:"12 meses de garantía" },
+    { icono:"bateria", marca:"Bosch",  modelo:"AGM 70Ah",   desc:"Tecnología AGM para vehículos con sistema Start-Stop.", garantia:"12 meses de garantía" },
   ],
 
   // Otros productos: categorías secundarias sin PNG propio, se muestran con "!"
@@ -174,7 +167,7 @@ const SITIO = {
   // ── SEO ────────────────────────────────────────────────────────
   seo: {
     titulo:      "MR PERFORMANCE — Mecánica y diagnóstico electrónico a domicilio",
-    descripcion: "Servicios mecánicos y diagnóstico electrónico a domicilio en Santiago. Mecánicos especializados, Escáner de última generación. Cotiza por WhatsApp.",
+    descripcion: "Servicios mecánicos y diagnóstico electrónico a domicilio en Santiago. Ingenieros especializados, Escáner de última generación. Cotiza por WhatsApp.",
     url:         "https://mrperformance.cl",
     imagen:      "https://mrperformance.cl/preview.jpg",
   },
