@@ -11,7 +11,7 @@ const SITIO = {
   tagline:      "<span class=\"mr\">MR</span><span class=\"perf\">PERFORMANCE</span>",
   division:     "HIGH-END PERFORMANCE DIVISION",
   hero_titulo:  "Mecánica de alto rendimiento, a la puerta de tu casa",
-  hero_desc:    "Diagnóstico electrónico y mecánica a domicilio. Ingenieros especializados, Escáner de última generación.",
+  hero_desc:    "Diagnóstico electrónico y mecánica a domicilio. Mecánicos especializados, Escáner de última generación.",
   hero_badge:   "Servicio a domicilio · Santiago",
 
   // Estadísticas del panel del hero (Escáner). Edita libremente.
@@ -54,7 +54,7 @@ const SITIO = {
   // ── DIFERENCIADORES (hero) ──────────────────────────────────────
   // icono: clave de PNG en /iconos. Si la clave no tiene PNG asociado, se muestra "!"
   diferenciadores: [
-    { icono:"ingeniero", titulo:"Ingenieros especializados", desc:"Profesionales certificados, no mecánicos improvisados." },
+    { icono:"ingeniero", titulo:"Mecánicos especializados", desc:"Profesionales certificados, no mecánicos improvisados." },
     { icono:"escaner",   titulo:"Escáner de última generación", desc:"Diagnóstico electrónico preciso, marca por marca." },
     { icono:"furgoneta", titulo:"Servicio a domicilio", desc:"Vamos donde estés, sin que muevas tu vehículo." },
   ],
@@ -117,19 +117,19 @@ const SITIO = {
   // ── CÓMO FUNCIONA (3 pasos) ──────────────────────────────────────
   proceso: [
     { numero:"01", titulo:"Cuéntanos qué le pasa a tu vehículo", desc:"Completa el formulario o escríbenos directo por WhatsApp." },
-    { numero:"02", titulo:"Te enviamos una cotización", desc:"Un ingeniero revisa tu caso y te responde con precio y tiempo estimado." },
+    { numero:"02", titulo:"Te enviamos una cotización", desc:"Un mecánico revisa tu caso y te responde con precio y tiempo estimado." },
     { numero:"03", titulo:"Coordinamos día y hora", desc:"Vamos a tu domicilio con el Escáner y las herramientas listas." },
   ],
 
   // ── EQUIPO ────────────────────────────────────────────────────────
   // foto: deja vacío ("") para mostrar iniciales; o pon una URL de imagen cuando la tengas
   equipo: [
-    { nombre:"Mauricio Concha", cargo:"Ingeniero en Diagnóstico Electrónico",         experiencia:12, foto:"" },
+    { nombre:"Mauricio Concha", cargo:"Mecánico en Diagnóstico Electrónico",           experiencia:12, foto:"" },
     { nombre:"Ricardo Andrés",  cargo:"Especialista en Mecánica de Alto Rendimiento", experiencia:9,  foto:"" },
     { nombre:"Unboxing",        cargo:"Técnico en Sistemas Eléctricos y Baterías",    experiencia:7,  foto:"" },
   ],
 
-  historia: "El diagnóstico \"a ojo\" ya no alcanza. Por eso cada visita lleva Escáner profesional e ingenieros certificados, no aprendices.",
+  historia: "El diagnóstico \"a ojo\" ya no alcanza. Por eso cada visita lleva Escáner profesional y mecánicos certificados, no aprendices.",
 
   // ── TESTIMONIOS ───────────────────────────────────────────────────
   // Vacío hasta tener opiniones reales de clientes. Agrega objetos con este formato:
@@ -174,7 +174,7 @@ const SITIO = {
   // ── SEO ────────────────────────────────────────────────────────
   seo: {
     titulo:      "MR PERFORMANCE — Mecánica y diagnóstico electrónico a domicilio",
-    descripcion: "Servicios mecánicos y diagnóstico electrónico a domicilio en Santiago. Ingenieros especializados, Escáner de última generación. Cotiza por WhatsApp.",
+    descripcion: "Servicios mecánicos y diagnóstico electrónico a domicilio en Santiago. Mecánicos especializados, Escáner de última generación. Cotiza por WhatsApp.",
     url:         "https://mrperformance.cl",
     imagen:      "https://mrperformance.cl/preview.jpg",
   },
