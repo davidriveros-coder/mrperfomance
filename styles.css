@@ -409,7 +409,7 @@ footer .fine { margin-top:1rem; font-size:.76rem; opacity:.5; }
 @media(max-width:880px) {
   .hero-grid, .contact-grid, .cotizar-grid { grid-template-columns:1fr; }
   .hero-grid { grid-template-areas:"intro" "visual" "difs"; }
-  .hero-visual { max-width:420px; margin:0 auto; }
+  .hero-visual { max-width:420px; margin:1.8rem auto 0; }
   .nav-links { display:none; }
   .nav-toggle { display:flex; align-items:center; justify-content:center; }
   .nav-links.open {

@@ -85,7 +85,7 @@ const SITIO = {
     },
     {
       icono:"bateria", titulo:"Venta e instalación de baterías",
-      desc:"Baterías de calidad certificada, instaladas al toque.",
+      desc:"Baterías de calidad certificada.",
       detalle:"Medimos el estado de tu batería y sistema de carga antes de recomendar el reemplazo.",
       incluye: [
         "Medición del estado de tu batería actual",
@@ -152,8 +152,8 @@ const SITIO = {
   // ── PÁGINA /productos (landing propia) ───────────────────────────
   productos_pagina: {
     hero_badge:  "Repuestos y baterías certificadas",
-    hero_titulo: "Productos de mecánica, con garantía e instalación incluida",
-    hero_desc:   "Baterías y repuestos de marcas certificadas — cotiza por WhatsApp y te los instalamos en tu domicilio.",
+    hero_titulo: "Productos de mecánica, con garantía certificada",
+    hero_desc:   "Baterías y repuestos de marcas certificadas — consulta disponibilidad por WhatsApp.",
   },
 
   // Baterías: producto principal de la página /productos
@@ -167,7 +167,7 @@ const SITIO = {
   otros_productos: [
     { nombre:"Filtros de aceite y aire", desc:"Compatibles con la mayoría de las marcas." },
     { nombre:"Aceites y lubricantes", desc:"Sintéticos y semisintéticos, por litro o cambio completo." },
-    { nombre:"Pastillas de freno", desc:"Repuesto e instalación en el mismo servicio." },
+    { nombre:"Pastillas de freno", desc:"Repuesto de calidad para tu vehículo." },
     { nombre:"Ampolletas y fusibles", desc:"Recambio rápido para luces y sistemas eléctricos." },
   ],
 
