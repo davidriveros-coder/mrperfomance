@@ -15,15 +15,18 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy        = "strict-origin-when-cross-origin"
     Permissions-Policy     = "geolocation=(), microphone=(), camera=()"
-    # CSP: permite solo recursos propios.
+    # CSP: permite solo recursos propios (Decap CMS y Netlify Identity se sirven
+    # desde /admin/vendor, no desde un CDN externo, así que no hace falta abrir
+    # script-src a terceros). 'blob:' en img-src es para las previews de imágenes
+    # que sube el panel /admin.
     # 'unsafe-inline' es necesario porque el CSS y el JS están embebidos en el HTML.
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
 
-# ── Cache corto para el config (cámbialo cuando publiques el sitio real) ──
+# ── Cache corto para los datos del sitio (se editan seguido desde /admin) ──
 [[headers]]
-  for = "/config.js"
+  for = "/config.json"
   [headers.values]
-    Cache-Control = "public, max-age=300"
+    Cache-Control = "public, max-age=60"
 
 # ── Rutas "limpias" a secciones de la home (para compartir en Instagram, anuncios, etc.) ──
 # /servicios NO está acá: es una página propia (servicios.html) que Netlify sirve

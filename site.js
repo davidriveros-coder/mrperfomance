@@ -4,7 +4,7 @@
  * ║  de MR PERFORMANCE. Requiere que config.js se cargue antes.   ║
  * ╚══════════════════════════════════════════════════════════════╝
  */
-const S = (typeof SITIO !== "undefined") ? SITIO : {};
+let S = (typeof SITIO !== "undefined") ? SITIO : {};
 
 function esc(s) {
   return String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;")
@@ -24,7 +24,30 @@ const ICONOS_IMG = {
   mecanica:   "iconos/mecanica.png",
   mantencion: "iconos/mantencion.png",
 };
+// ── Fotos de producto (PNG en /iconos/baterias). Llenan el círculo como foto, no como ícono ──
+const PRODUCTO_FOTOS = {
+  "rocket-54ah":    "iconos/baterias/rocket-54ah.png",
+  "rocket-70ah":    "iconos/baterias/rocket-70ah.png",
+  "bosch-s4-55ah":  "iconos/baterias/bosch-s4-55ah.png",
+  "bosch-70ah":     "iconos/baterias/bosch-70ah.png",
+  "bosch-90ah":     "iconos/baterias/bosch-90ah.png",
+  "bosch-agm-70ah": "iconos/baterias/bosch-agm-70ah.png",
+};
+
+// ── Íconos de redes sociales / WhatsApp (PNG en /iconos/redes-sociales) ──
+const ICONOS_REDES = {
+  instagram: "iconos/redes-sociales/instagram.png",
+  facebook:  "iconos/redes-sociales/facebook.png",
+  whatsapp:  "iconos/redes-sociales/whatsapp.png",
+};
+function renderIconoRed(clave) {
+  if (ICONOS_REDES[clave]) return `<img src="${ICONOS_REDES[clave]}" alt="${esc(clave)}" loading="lazy" />`;
+  return "!";
+}
 function renderIcono(valor, alt) {
+  if (PRODUCTO_FOTOS[valor]) {
+    return `<span class="icono-badge icono-foto"><img src="${PRODUCTO_FOTOS[valor]}" alt="${esc(alt || valor)}" loading="lazy" /></span>`;
+  }
   if (ICONOS_IMG[valor]) {
     return `<span class="icono-badge"><img src="${ICONOS_IMG[valor]}" alt="${esc(alt || valor)}" loading="lazy" /></span>`;
   }

@@ -1,0 +1,168 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Permite probar el panel en localhost sin tocar el sitio real (con `npx decap-server`).
+# En producción esto no hace nada — usa siempre el backend de arriba.
+local_backend: true
+
+publish_mode: simple
+media_folder: "iconos/uploads"
+public_folder: "/iconos/uploads"
+
+collections:
+  - name: "sitio"
+    label: "Sitio MR PERFORMANCE"
+    files:
+      - file: "config.json"
+        label: "Contenido del sitio"
+        name: "config"
+        fields:
+          - { label: "Nombre (no tocar)", name: "nombre", widget: "hidden" }
+          - { label: "Tagline (no tocar)", name: "tagline", widget: "hidden" }
+          - { label: "División (no tocar)", name: "division", widget: "hidden" }
+
+          - { label: "Título principal (hero)", name: "hero_titulo", widget: "string" }
+          - { label: "Descripción principal (hero)", name: "hero_desc", widget: "text" }
+          - { label: "Badge del hero (frase corta arriba del título)", name: "hero_badge", widget: "string" }
+          - label: "Estadísticas del hero (ej: +8 Años de experiencia)"
+            name: "hero_stats"
+            widget: "list"
+            summary: "{{fields.numero}} {{fields.label}}"
+            fields:
+              - { label: "Número", name: "numero", widget: "string" }
+              - { label: "Etiqueta", name: "label", widget: "string" }
+
+          - { label: "Colores del sitio (no tocar)", name: "colores", widget: "hidden" }
+
+          - { label: "Teléfono", name: "telefono", widget: "string" }
+          - { label: "WhatsApp (solo números con código país, ej: 56912345678)", name: "whatsapp", widget: "string", pattern: ["^[0-9]+$", "Solo números, sin +, espacios ni guiones"] }
+          - { label: "Mensaje inicial al escribir por WhatsApp", name: "whatsapp_msg", widget: "string" }
+          - { label: "Email de contacto", name: "email", widget: "string" }
+          - { label: "Zona de cobertura", name: "zona_cobertura", widget: "string" }
+          - { label: "Comunas que se muestran como chips", name: "comunas", widget: "list" }
+
+          - label: "Redes sociales"
+            name: "redes"
+            widget: "object"
+            fields:
+              - { label: "Instagram (URL completa)", name: "instagram", widget: "string", required: false }
+              - { label: "Facebook (URL completa)", name: "facebook", widget: "string", required: false }
+              - { label: "TikTok (URL completa)", name: "tiktok", widget: "string", required: false }
+
+          - label: "Diferenciadores (3 tarjetas del hero)"
+            name: "diferenciadores"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Ícono (no tocar)", name: "icono", widget: "hidden" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "string" }
+
+          - label: "Servicios"
+            name: "servicios"
+            widget: "list"
+            summary: "{{fields.titulo}}"
+            fields:
+              - { label: "Ícono (no tocar)", name: "icono", widget: "hidden" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Descripción corta (tarjeta)", name: "desc", widget: "string" }
+              - { label: "Descripción larga (página /servicios)", name: "detalle", widget: "text" }
+              - { label: "Qué incluye (lista de puntos)", name: "incluye", widget: "list" }
+
+          - label: "Página /servicios — textos del encabezado"
+            name: "servicios_pagina"
+            widget: "object"
+            fields:
+              - { label: "Badge", name: "hero_badge", widget: "string" }
+              - { label: "Título", name: "hero_titulo", widget: "string" }
+              - { label: "Descripción", name: "hero_desc", widget: "text" }
+
+          - label: "Cómo funciona (3 pasos)"
+            name: "proceso"
+            widget: "list"
+            summary: "{{fields.numero}} — {{fields.titulo}}"
+            fields:
+              - { label: "Número (01, 02, 03)", name: "numero", widget: "string" }
+              - { label: "Título", name: "titulo", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "string" }
+
+          - { label: "Quiénes somos (historia/fundadores)", name: "historia", widget: "text" }
+
+          - label: "Testimonios de clientes"
+            name: "testimonios"
+            widget: "list"
+            summary: "{{fields.nombre}} ({{fields.estrellas}}★)"
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Comuna", name: "comuna", widget: "string" }
+              - { label: "Estrellas (1 a 5)", name: "estrellas", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+              - { label: "Comentario", name: "texto", widget: "text" }
+
+          - { label: "Marcas de vehículos atendidas", name: "marcas_atendidas", widget: "list" }
+
+          - label: "Horarios de atención"
+            name: "horarios"
+            widget: "object"
+            fields:
+              - label: "Lunes a Viernes"
+                name: "lunes_viernes"
+                widget: "object"
+                fields:
+                  - { label: "Texto (no tocar)", name: "texto", widget: "hidden" }
+                  - { label: "Desde (formato 24h, ej: 08:00)", name: "desde", widget: "string", required: false }
+                  - { label: "Hasta (formato 24h, ej: 20:00)", name: "hasta", widget: "string", required: false }
+                  - { label: "Abierto este bloque", name: "activo", widget: "boolean" }
+              - label: "Sábado"
+                name: "sabado"
+                widget: "object"
+                fields:
+                  - { label: "Texto (no tocar)", name: "texto", widget: "hidden" }
+                  - { label: "Desde", name: "desde", widget: "string", required: false }
+                  - { label: "Hasta", name: "hasta", widget: "string", required: false }
+                  - { label: "Abierto este bloque", name: "activo", widget: "boolean" }
+              - label: "Domingo y feriados"
+                name: "domingo"
+                widget: "object"
+                fields:
+                  - { label: "Texto (no tocar)", name: "texto", widget: "hidden" }
+                  - { label: "Desde", name: "desde", widget: "string", required: false }
+                  - { label: "Hasta", name: "hasta", widget: "string", required: false }
+                  - { label: "Abierto este bloque", name: "activo", widget: "boolean" }
+          - { label: "Atiende emergencias fuera de horario (sábado/domingo a consultar)", name: "urgencias_247", widget: "boolean" }
+
+          - label: "Página /productos — textos del encabezado"
+            name: "productos_pagina"
+            widget: "object"
+            fields:
+              - { label: "Badge", name: "hero_badge", widget: "string" }
+              - { label: "Título", name: "hero_titulo", widget: "string" }
+              - { label: "Descripción", name: "hero_desc", widget: "text" }
+
+          - label: "Baterías"
+            name: "baterias"
+            widget: "list"
+            summary: "{{fields.marca}} {{fields.modelo}}"
+            fields:
+              - { label: "Ícono (no tocar)", name: "icono", widget: "hidden" }
+              - { label: "Marca", name: "marca", widget: "string" }
+              - { label: "Modelo", name: "modelo", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "string" }
+              - { label: "Garantía", name: "garantia", widget: "string" }
+
+          - label: "Otros productos"
+            name: "otros_productos"
+            widget: "list"
+            summary: "{{fields.nombre}}"
+            fields:
+              - { label: "Nombre", name: "nombre", widget: "string" }
+              - { label: "Descripción", name: "desc", widget: "string" }
+
+          - label: "SEO (avanzado — cómo se ve en Google y al compartir)"
+            name: "seo"
+            widget: "object"
+            fields:
+              - { label: "Título SEO", name: "titulo", widget: "string" }
+              - { label: "Descripción SEO", name: "descripcion", widget: "text" }
+              - { label: "URL del sitio (no tocar)", name: "url", widget: "hidden" }
+              - { label: "Imagen de vista previa (no tocar)", name: "imagen", widget: "hidden" }

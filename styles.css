@@ -22,7 +22,7 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
-  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
   background:var(--negro); color:var(--blanco); overflow-x:hidden;
   line-height:1.6;
 }
@@ -35,6 +35,7 @@ img { max-width:100%; display:block; }
 .container { max-width:1200px; margin:0 auto; padding:0 1.5rem; }
 
 .titulo-racing {
+  font-family:'Barlow','Segoe UI',system-ui,-apple-system,sans-serif;
   font-weight:900; text-transform:uppercase; letter-spacing:.02em;
   font-style:italic; line-height:1.05;
 }
@@ -147,6 +148,8 @@ nav.scrolled { padding:.5rem 1.5rem; box-shadow:var(--shadow-md); }
   background:linear-gradient(155deg,var(--negro-suave),#101012); border:1.5px solid var(--rojo);
   color:var(--rojo); font-weight:900; font-size:1.3rem; font-family:inherit;
 }
+.icono-badge.icono-foto { overflow:hidden; background:#fff; }
+.icono-badge.icono-foto img { width:100%; height:100%; object-fit:cover; }
 
 /* Hero sin visual (páginas internas): centra el contenido */
 .hero-solo { max-width:760px; }
@@ -385,6 +388,7 @@ section { padding:4.5rem 0; }
 .socials { display:flex; gap:.7rem; margin-top:1.4rem; }
 .socials a { width:42px; height:42px; border-radius:12px; background:var(--negro-suave); border:1px solid var(--borde); display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:900; color:var(--plata); transition:background .2s, transform .15s, color .2s; }
 .socials a:hover { background:var(--rojo); color:#fff; transform:translateY(-3px); border-color:var(--rojo); }
+.socials a img { width:55%; height:55%; object-fit:contain; }
 
 /* ─── FOOTER ─── */
 footer { background:#080808; color:var(--gris); padding:2.5rem 0 6rem; text-align:center; border-top:1px solid var(--borde); }
@@ -400,6 +404,7 @@ footer .fine { margin-top:1rem; font-size:.76rem; opacity:.5; }
   box-shadow:0 8px 24px rgba(37,211,102,.45); transition:transform .2s;
 }
 .wa-float:hover { transform:scale(1.08); }
+.wa-float img { width:60%; height:60%; object-fit:contain; }
 
 /* ─── REVEAL ─── */
 .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s, transform .6s; }

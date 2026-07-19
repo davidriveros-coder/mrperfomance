@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- config.js debe cargarse primero — contiene todos los datos del sitio -->
+  <!-- config.js dispara la carga de config.json (los datos del sitio) apenas parsea el <head> -->
   <script src="config.js"></script>
+  <!-- Netlify Identity: captura el link de invitación/recuperación de clave y abre el panel /admin -->
+  <script src="admin/vendor/netlify-identity-widget.js"></script>
   <!-- SEO (se sobreescribe dinámicamente desde config.js) -->
   <title>MR PERFORMANCE</title>
   <meta name="description" content="" />
@@ -16,6 +18,9 @@
   <meta property="og:image"       content="" />
   <meta name="twitter:card"        content="summary_large_image" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230D0D0D'/><text x='50' y='68' font-size='60' text-anchor='middle' fill='%23C8102E' font-family='Arial' font-weight='bold'>M</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -228,7 +233,7 @@
 </footer>
 
 <!-- ─── WHATSAPP FLOAT (persistente) ─── -->
-<a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp">!</a>
+<a href="#" class="wa-float" data-wa-link aria-label="Escríbenos por WhatsApp"><img src="iconos/redes-sociales/whatsapp.png" alt="WhatsApp" /></a>
 
 <script src="site.js"></script>
 <script>
@@ -314,7 +319,7 @@ function aplicarConfig() {
 
   const redes = S.redes || {};
   $("socials").innerHTML = Object.entries(redes).filter(([,url])=>url)
-    .map(([k,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(k)}">!</a>`).join("");
+    .map(([k,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(k)}">${renderIconoRed(k)}</a>`).join("");
 }
 
 // ── HORARIOS: render + estado en vivo ──
@@ -378,8 +383,18 @@ function initFormulario() {
   });
 }
 
+// ── Netlify Identity: si el link de invitación/recuperación cae en "/", abre el panel ──
+if (window.netlifyIdentity) {
+  window.netlifyIdentity.on("init", (user) => {
+    if (!user) {
+      window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+    }
+  });
+}
+
 // ── INIT ──
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  S = await window.SITIO_LISTO;
   aplicarColores();
   aplicarSEO();
   aplicarWaLinks();
