@@ -10,7 +10,7 @@ const SITIO = {
   nombre:       "MR PERFORMANCE",
   tagline:      "<span class=\"mr\">MR</span><span class=\"perf\">PERFORMANCE</span>",
   division:     "HIGH-END PERFORMANCE DIVISION",
-  hero_titulo:  "Mecánica de alto rendimiento, a la puerta de tu casa",
+  hero_titulo:  "Mecánica de alto rendimiento y venta de baterías, a la puerta de tu casa",
   hero_desc:    "Diagnóstico electrónico y mecánica a domicilio. Ingenieros especializados, Escáner de última generación.",
   hero_badge:   "Servicio a domicilio · Santiago",
 
