@@ -215,9 +215,10 @@
         <div class="socials" id="socials"></div>
       </div>
       <div class="cobertura-card">
-        <span class="pin">!</span>
-        <h3>Zona de cobertura</h3>
-        <div class="cobertura-chips" id="cobertura-chips"></div>
+        <h3 id="cobertura-zona"></h3>
+        <div class="cobertura-mapa-img">
+          <img src="iconos/mapa/images.jpg" alt="Mapa de la Región Metropolitana" loading="lazy" />
+        </div>
       </div>
     </div>
   </div>
@@ -310,16 +311,16 @@ function aplicarConfig() {
 
   // Contacto
   const ci = [
-    { txt:S.telefono },
-    { txt:S.email },
-    { txt:S.whatsapp ? "Escríbenos por WhatsApp" : "" },
+    { tipo:"telefono", txt:S.telefono },
+    { tipo:"email",    txt:S.email },
+    { tipo:"whatsapp", txt:S.whatsapp ? "Escríbenos por WhatsApp" : "" },
   ].filter(x => x.txt);
-  $("contact-list").innerHTML = ci.map(x => `<li><span class="ico">!</span><span>${esc(x.txt)}</span></li>`).join("");
-  $("cobertura-chips").innerHTML = (S.comunas || []).map(c => `<span>${esc(c)}</span>`).join("");
+  $("contact-list").innerHTML = ci.map(x => `<li><span class="ico">${renderIconoContacto(x.tipo)}</span><span>${esc(x.txt)}</span></li>`).join("");
+  $("cobertura-zona").innerHTML = `Atendemos a toda la <span class="rojo">${esc(S.zona_cobertura || "")}</span>`;
 
   const redes = S.redes || {};
   $("socials").innerHTML = Object.entries(redes).filter(([,url])=>url)
-    .map(([k,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(k)}">${renderIconoRed(k)}</a>`).join("");
+    .map(([k,url]) => `<a href="${esc(url)}" target="_blank" rel="noopener"><span class="ico">${renderIconoRed(k)}</span><span>Mr Performance</span></a>`).join("");
 }
 
 // ── HORARIOS: render + estado en vivo ──
